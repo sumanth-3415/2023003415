@@ -8,13 +8,12 @@ function App() {
   const [filter, setFilter] = useState('All')
   const [now, setNow] = useState(Date.now())
 
-  // Update "now" every second for relative timestamps
+  
   useEffect(() => {
     const interval = setInterval(() => setNow(Date.now()), 1000)
     return () => clearInterval(interval)
   }, [])
 
-  // Fetch notifications
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -37,15 +36,13 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
-  // Filter notifications
+ 
   const filtered = filter === 'All' 
     ? notifications 
     : notifications.filter(n => n.type === filter)
 
-  // Get unique types
   const types = ['All', ...new Set(notifications.map(n => n.type))]
 
-  // Get badge color by type
   const getBadgeColor = (type) => {
     switch(type) {
       case 'Placement': return '#FFB84D'
@@ -55,7 +52,7 @@ function App() {
     }
   }
 
-  // Format timestamp (now is from state, not called during render)
+ 
   const formatTime = (timestamp) => {
     const diff = now - timestamp
     const seconds = Math.floor(diff / 1000)

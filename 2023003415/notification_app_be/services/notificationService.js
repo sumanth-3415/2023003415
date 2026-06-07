@@ -1,16 +1,13 @@
-/**
- * Notification Service
- * Handles fetching, prioritizing, and managing notifications
- */
+
 
 const Logger = require('../../logging_middleware/logger');
 const { sortByPriority } = require('../utils/priorityCalculator');
 
-const API_URL = 'https://dummyjson.com/posts'; // Placeholder API - adjust as needed
+const API_URL = 'https://dummyjson.com/posts'; 
 
 /**
- * Fetch all notifications from the API
- * @returns {Promise<Array>} Array of notification objects
+ * 
+ * @returns {Promise<Array>} 
  */
 async function fetchNotifications() {
   Logger.info('fetchNotifications', 'Starting to fetch notifications from API', {
@@ -41,11 +38,10 @@ async function fetchNotifications() {
 }
 
 /**
- * Transform API data to notification format
- * Add: type, timestamp, isRead status
+ 
  *
- * @param {Array} rawData - Raw data from API
- * @returns {Array} Transformed notification objects
+ * @param {Array} rawData 
+ * @returns {Array} 
  */
 function transformToNotifications(rawData) {
   Logger.info('transformToNotifications', 'Starting transformation', {
@@ -74,11 +70,9 @@ function transformToNotifications(rawData) {
 }
 
 /**
- * Assign notification type based on index (placeholder logic)
- * In real app, this would come from the API
  *
- * @param {number} index - Index of notification
- * @returns {string} Type (Placement, Result, or Event)
+ * @param {number} index 
+ * @returns {string} 
  */
 function assignNotificationType(index) {
   const types = ['Placement', 'Result', 'Event'];
@@ -86,31 +80,31 @@ function assignNotificationType(index) {
 }
 
 /**
- * Get top 10 unread notifications sorted by priority
- * @returns {Promise<Array>} Top 10 unread notifications
+ 
+ * @returns {Promise<Array>} 
  */
 async function getTop10UnreadNotifications() {
   const startTime = Date.now();
   Logger.info('getTop10UnreadNotifications', 'Starting process');
 
   try {
-    // Step 1: Fetch notifications
+   
     const rawNotifications = await fetchNotifications();
 
-    // Step 2: Transform to notification format
+
     const notifications = transformToNotifications(rawNotifications);
 
-    // Step 3: Filter unread
+    
     const unreadNotifications = notifications.filter((n) => !n.isRead);
     Logger.info('getTop10UnreadNotifications', 'Filtered unread', {
       total: notifications.length,
       unread: unreadNotifications.length,
     });
 
-    // Step 4: Sort by priority
+    
     const sortedNotifications = sortByPriority(unreadNotifications);
 
-    // Step 5: Get top 10
+
     const top10 = sortedNotifications.slice(0, 10);
 
     const duration = Date.now() - startTime;
@@ -127,12 +121,11 @@ async function getTop10UnreadNotifications() {
 }
 
 /**
- * Efficient Top-10 maintenance using Min Heap (simulation)
- * In production, use a proper heap data structure library
- *
- * @param {Array} currentTop10 - Current top 10 notifications
- * @param {Object} newNotification - Newly arrived notification
- * @returns {Array} Updated top 10
+
+
+ * @param {Array} currentTop10 
+ * @param {Object} newNotification 
+ * @returns {Array} 
  */
 function updateTop10WithNewNotification(currentTop10, newNotification) {
   Logger.info('updateTop10WithNewNotification', 'New notification arrived', {

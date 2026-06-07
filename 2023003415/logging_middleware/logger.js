@@ -1,14 +1,11 @@
-/**
- * Logging Middleware - Reusable Logger
- * Logs: Timestamp, Function name, Operation, Status, Error details
- */
+
 
 class Logger {
   /**
-   * Log info level messages
-   * @param {string} functionName - Name of the function being logged
-   * @param {string} operation - What operation is being performed
-   * @param {any} data - Additional data to log
+   
+   * @param {string} functionName 
+   * @param {string} operation 
+   * @param {any} data
    */
   static info(functionName, operation, data = {}) {
     const timestamp = new Date().toISOString();
@@ -16,10 +13,10 @@ class Logger {
   }
 
   /**
-   * Log success level messages
-   * @param {string} functionName - Name of the function being logged
-   * @param {string} operation - What operation was successful
-   * @param {any} data - Result data
+   
+   * @param {string} functionName 
+   * @param {string} operation
+   * @param {any} data 
    */
   static success(functionName, operation, data = {}) {
     const timestamp = new Date().toISOString();
@@ -27,10 +24,10 @@ class Logger {
   }
 
   /**
-   * Log error level messages
-   * @param {string} functionName - Name of the function where error occurred
-   * @param {string} operation - What operation failed
-   * @param {Error} error - Error object
+   
+   * @param {string} functionName 
+   * @param {string} operation 
+   * @param {Error} error 
    */
   static error(functionName, operation, error) {
     const timestamp = new Date().toISOString();
@@ -41,9 +38,9 @@ class Logger {
   }
 
   /**
-   * Log performance metrics
-   * @param {string} functionName - Name of the function
-   * @param {number} duration - Time taken in milliseconds
+   
+   * @param {string} functionName 
+   * @param {number} duration 
    */
   static performance(functionName, duration) {
     const timestamp = new Date().toISOString();
